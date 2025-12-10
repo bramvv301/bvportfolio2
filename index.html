@@ -53,7 +53,7 @@
         "@type": "Offer",
         "name": "Op Aanvraag",
         "description": "Uitgebreid platform of website die meegroeit met je bedrijf",
-        "price": "925",
+        "price": "1125",
         "priceCurrency": "EUR",
         "availability": "https://schema.org/InStock",
         "validFrom": "2025-12-01",
@@ -638,12 +638,28 @@
     to { transform: rotate(360deg); }
   }
   .success-animation {
-    animation: successPulse 0.6s ease-out;
+    animation: successPulse 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
   }
   @keyframes successPulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.05); }
-    100% { transform: scale(1); }
+    0% { 
+      transform: scale(1);
+      box-shadow: 0 8px 24px rgba(63, 63, 255, 0.4);
+    }
+    30% { 
+      transform: scale(1.1);
+      box-shadow: 0 12px 32px rgba(16, 185, 129, 0.5);
+    }
+    60% {
+      transform: scale(0.95);
+    }
+    100% { 
+      transform: scale(1);
+      box-shadow: 0 8px 24px rgba(63, 63, 255, 0.4);
+    }
+  }
+  .modal-btn-primary.success-animation {
+    background: linear-gradient(135deg, #10b981, #059669, #047857);
+    animation: successPulse 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
   }
   @media (hover: hover) {
   .cta:hover {
@@ -1212,11 +1228,26 @@
     }
   }
   .hero-sub .price-strikethrough {
-    color: rgba(255, 255, 255, 0.5);
+    color: rgba(255, 255, 255, 0.4);
     text-decoration: line-through;
-    text-decoration-thickness: 2px;
-    text-decoration-color: rgba(255, 255, 255, 0.6);
+    text-decoration-thickness: 2.5px;
+    text-decoration-color: rgba(255, 255, 255, 0.7);
+    text-decoration-style: solid;
     margin-left: 4px;
+    display: inline-block;
+    font-weight: 500;
+  }
+  
+  /* Verborgen state voor tijdens animatie */
+  .hero-sub .price-strikethrough.strikethrough-hidden {
+    opacity: 0;
+  }
+  
+  /* Zichtbare state na animatie */
+  .hero-sub .price-strikethrough.strikethrough-visible {
+    opacity: 0.6;
+    text-decoration: line-through;
+    transition: opacity 0.5s ease-in;
   }
   .recent-activity {
     text-align: center;
@@ -1323,7 +1354,9 @@
     max-width: 1200px; 
     margin: 60px auto 0; 
     padding: 60px 16px 80px; 
-    text-align: center; 
+    text-align: center;
+    position: relative;
+    z-index: 1;
   }
   @media (min-width: 375px) {
     .maintenance-section {
@@ -2481,7 +2514,37 @@
     }
   }
   .modal-btn:active {
-    transform: scale(0.98);
+    transform: scale(0.95);
+    transition: transform 0.1s ease;
+  }
+  .modal-btn {
+    position: relative;
+    overflow: hidden;
+  }
+  .modal-btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s ease, height 0.6s ease;
+  }
+  .modal-btn:active::before {
+    width: 300px;
+    height: 300px;
+    transition: width 0.3s ease, height 0.3s ease;
+  }
+  .modal-btn-primary:active {
+    transform: scale(0.95);
+    box-shadow: 0 4px 12px rgba(63, 63, 255, 0.3);
+  }
+  .modal-btn-secondary:active {
+    transform: scale(0.95);
+    background: rgba(255, 255, 255, 0.08);
   }
   .modal-btn-primary {
     background: linear-gradient(135deg, #3844ff, #5866ff, #7b8bff);
@@ -2506,15 +2569,47 @@
     font-size: 13px;
     margin-top: 6px;
     display: none;
+    opacity: 0;
+    transform: translateY(-5px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
   }
   .form-group.error .form-error {
     display: block;
+    opacity: 1;
+    transform: translateY(0);
+    animation: errorFadeIn 0.3s ease-out;
+  }
+  @keyframes errorFadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-5px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
   .form-group.error .form-input,
   .form-group.error .form-select,
   .form-group.error .form-textarea {
     border-color: #ef4444;
-    background: rgba(239, 68, 68, 0.05);
+    background: rgba(239, 68, 68, 0.08);
+    box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.15);
+    transition: border-color 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+  }
+  .form-group.error.shake .form-input,
+  .form-group.error.shake .form-select,
+  .form-group.error.shake .form-textarea {
+    animation: errorShake 0.5s ease-out;
+  }
+  @keyframes errorShake {
+    0%, 100% { transform: translateX(0); }
+    10%, 30%, 50%, 70%, 90% { transform: translateX(-6px); }
+    20%, 40%, 60%, 80% { transform: translateX(6px); }
+  }
+  .form-group.error .form-label {
+    color: #ef4444;
+    transition: color 0.3s ease;
   }
   .modal-btn-primary:disabled {
     opacity: 0.6;
@@ -2529,9 +2624,28 @@
     display: none;
     text-align: center;
     padding: 40px 32px;
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+    transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
   }
   .success-message.active {
     display: block;
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    animation: successEntrance 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  @keyframes successEntrance {
+    0% {
+      opacity: 0;
+      transform: translateY(30px) scale(0.9);
+    }
+    60% {
+      transform: translateY(-5px) scale(1.02);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
   }
   .success-icon {
     width: 64px;
@@ -2544,18 +2658,58 @@
     justify-content: center;
     font-size: 32px;
     color: #10b981;
+    opacity: 0;
+    transform: scale(0);
+    animation: successIconPop 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) 0.2s forwards;
+  }
+  @keyframes successIconPop {
+    0% {
+      opacity: 0;
+      transform: scale(0) rotate(-180deg);
+    }
+    60% {
+      transform: scale(1.2) rotate(10deg);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1) rotate(0deg);
+    }
+  }
+  .success-message.active .success-icon {
+    animation: successIconPop 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) 0.2s forwards,
+               successIconPulse 2s ease-in-out 1s infinite;
+  }
+  @keyframes successIconPulse {
+    0%, 100% {
+      box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4);
+    }
+    50% {
+      box-shadow: 0 0 0 10px rgba(16, 185, 129, 0);
+    }
   }
   .success-message h3 {
     font-size: 24px;
     font-weight: 700;
     color: #ffffff;
     margin: 0 0 12px;
+    opacity: 0;
+    transform: translateY(10px);
+    animation: successTextFadeIn 0.5s ease 0.4s forwards;
+  }
+  @keyframes successTextFadeIn {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
   .success-message p {
     font-size: 16px;
     color: #d0d0d3;
     line-height: 1.6;
     margin: 0;
+    opacity: 0;
+    transform: translateY(10px);
+    animation: successTextFadeIn 0.5s ease 0.6s forwards;
   }
   .modal-footer {
     padding: 20px 20px 24px;
@@ -2594,12 +2748,6 @@
     z-index: 1;
   }
 
-  /* Scroll-animatie: alleen op mobiel, desktop altijd zichtbaar */
-  .maintenance-section {
-    position: relative;
-    z-index: 10;
-  }
-  
   /* Desktop: geen animatie, altijd zichtbaar */
   @media (min-width: 768px) {
     .maintenance-section {
@@ -2628,25 +2776,95 @@
     }
   }
 
-  /* Mobiel: scroll-animatie actief */
+  /* Mobiel: altijd zichtbaar, geen animatie */
   @media (max-width: 767px) {
     .maintenance-section {
-      transition: transform 0.6s ease-out, opacity 0.6s ease-out;
-      transform: translateY(50px);
-      opacity: 0;
+      position: relative;
+      transform: none !important;
+      opacity: 1 !important;
+      visibility: visible !important;
+      pointer-events: auto !important;
+      margin-top: 40px;
+      padding: 40px 16px 60px;
+      min-height: auto;
+      display: block;
+      overflow: visible;
+    }
+
+    .maintenance-section h2 {
+      font-size: 28px;
+      margin-bottom: 20px;
+      color: #ffffff;
+      font-weight: 700;
+    }
+
+    .maintenance-section h3 {
+      font-size: 22px;
+      margin-top: 32px;
+      margin-bottom: 20px;
+      color: #ffffff;
+      font-weight: 600;
+    }
+
+    .maintenance-intro {
+      font-size: 18px;
+      margin-bottom: 24px;
+      opacity: 1 !important;
+      color: #f5f5ff;
+    }
+
+    .maintenance-intro-text {
+      margin-bottom: 32px;
+      padding: 0 8px;
+    }
+
+    .maintenance-intro-text p {
+      font-size: 15px;
+      line-height: 1.7;
+      margin-bottom: 16px;
+      opacity: 1 !important;
+      color: #e5e5e7;
+    }
+
+    .maintenance-features-grid {
+      margin-top: 24px;
+      margin-bottom: 32px;
+      padding: 0 8px;
+      display: grid !important;
+      grid-template-columns: 1fr !important;
+      gap: 20px !important;
+    }
+
+    .maintenance-choice {
+      margin-top: 32px;
+      margin-bottom: 32px;
+      padding: 0 8px;
+    }
+
+    .maintenance-section .pricing-container {
+      margin-top: 32px;
+      gap: 20px;
+      display: grid !important;
+      grid-template-columns: 1fr !important;
+    }
+
+    .maintenance-section .card {
+      opacity: 1 !important;
+      transform: none !important;
+      visibility: visible !important;
     }
 
     body.maintenance-active .main-group {
-      transform: translateY(-50px);
-      opacity: 0;
-      visibility: hidden;
-      pointer-events: none;
-      transition: transform 0.6s ease-out, opacity 0.6s ease-out, visibility 0.6s ease-out;
+      transform: none !important;
+      opacity: 1 !important;
+      visibility: visible !important;
+      pointer-events: auto !important;
     }
 
     body.maintenance-active .maintenance-section {
-      transform: translateY(0);
-      opacity: 1;
+      transform: none !important;
+      opacity: 1 !important;
+      visibility: visible !important;
     }
   }
   
@@ -2830,7 +3048,7 @@
     width: 48px;
     height: 48px;
     border-radius: 50%;
-    background: linear-gradient(135deg, #ffc107 0%, #ffb300 100%);
+    background: #5866ff;
     color: #ffffff;
     font-size: 24px;
     font-weight: 700;
@@ -2838,7 +3056,7 @@
     align-items: center;
     justify-content: center;
     margin-bottom: 20px;
-    box-shadow: 0 4px 20px rgba(255, 193, 7, 0.4);
+    box-shadow: 0 4px 20px rgba(88, 102, 255, 0.4);
     flex-shrink: 0;
   }
   @media (min-width: 768px) {
@@ -2941,7 +3159,7 @@
   </div>
 
   <div class="card">
-    <div class="title">Uitgebreid<br><small class='subtitle'>Perfect afgestemd op jouw merk.<br>Tot in de kleinste details. Met bestel-, afhaal- en reservatie-opties.</small></div>
+    <div class="title">Uitgebreid<br><small class='subtitle'>Perfect afgestemd op jouw merk.<br>Tot in de kleinste details. Met bestel-,<br> afhaal- en reservatie-opties.</small></div>
     <div class="price"><span class="price-old">€1.300</span><span class="price-new">€625</span> <small>/ eenmalig</small></div>
     <ul>
       <li><svg><circle cx="9" cy="9" r="9" /></svg>3–7 pagina's volledig op maat ontworpen voor jouw merk</li>
@@ -2952,12 +3170,12 @@
       <li><svg><circle cx="9" cy="9" r="9" /></svg>Toekomstbestendige technische basis (maatwerk uitbreidbaar)</li>
     </ul>
     <button class="cta">Bestel Nu</button>
-    <p class="cta-micro">✓ Geen verborgen kosten • ✓ 14 dagen support</p>
+    <p class="cta-micro">✓ Geen verborgen kosten • ✓ 30 dagen support</p>
   </div>
 
   <div class="card premium">
     <div class="title">Op Aanvraag<br><small class='subtitle'>Samen gebouwd.<br>Helemaal op maat.<br>Voor bedrijven die vooruitgaan.</small></div>
-    <div class="price"><span class="price-old">€1.900+</span><span class="price-new">€925</span> <small>/ eenmalig</small></div>
+      <div class="price"><span class="price-old">€1.900+</span><span class="price-new">€1125</span> <small>/ eenmalig</small></div>
     <ul>
       <li><svg><circle cx="9" cy="9" r="9" /></svg>Uitgebreid platform of website die meegroeit met je bedrijf</li>
       <li><svg><circle cx="9" cy="9" r="9" /></svg>Maatwerk functies, automations & systeemkoppelingen</li>
@@ -2967,7 +3185,7 @@
       <li><svg><circle cx="9" cy="9" r="9" /></svg>Inclusief begeleiding en advies tijdens de ontwikkeling</li>
     </ul>
     <button class="cta">Plan Strategie Call</button>
-    <p class="cta-micro">✓ Geen verborgen kosten • ✓ 14 dagen support</p>
+    <p class="cta-micro">✓ Geen verborgen kosten • ✓ Oneindig support</p>
   </div>
 
 </div>
@@ -3052,7 +3270,7 @@
           <td>Support na livegang</td>
           <td><span class="feature-pill">14 dagen</span></td>
           <td><span class="feature-pill">30 dagen</span></td>
-          <td><span class="feature-pill">3 maanden</span></td>
+          <td><span class="feature-pill">Voor altijd</span></td>
         </tr>
       </tbody>
     </table>
@@ -3213,7 +3431,7 @@
       <div class="choice-icon">×</div>
       <div class="choice-content">
         <h4>Zonder onderhoud</h4>
-        <p>Je ontvangt een volledig werkende website. Updates, hosting en beveiliging regel je zelf of later bij ons.</p>
+        <p>Je ontvangt een volledig werkende website. Updates, hosting en beveiliging regel je zelf of later bij mij.</p>
       </div>
     </div>
   </div>
@@ -3428,7 +3646,7 @@ document.addEventListener('DOMContentLoaded', function() {
             <option value="">Geen website pakket</option>
             <option value="Simpel">Simpel - €375</option>
             <option value="Uitgebreid">Uitgebreid - €625</option>
-            <option value="Op Aanvraag">Op Aanvraag - €925</option>
+            <option value="Op Aanvraag">Op Aanvraag - €1125</option>
           </select>
         </div>
         
@@ -3458,7 +3676,7 @@ document.addEventListener('DOMContentLoaded', function() {
     <div class="success-message" id="successMessage">
       <div class="success-icon">✓</div>
       <h3>Bedankt voor je aanvraag!</h3>
-      <p>We hebben je bericht ontvangen en nemen binnen 12-24 uur contact met je op.</p>
+      <p>Ik heb je bericht goed ontvangen en ik waardeer het dat je contact met me opneemt. Ik zorg ervoor dat je binnen 12 tot 24 uur een reactie van mij krijgt.</p>
     </div>
   </div>
 </div>
@@ -3475,7 +3693,14 @@ function openModal(packageName = '', packageType = 'website') {
   // Reset form
   form.reset();
   form.style.display = 'block';
+  form.style.opacity = '1';
+  form.style.transform = 'translateY(0)';
   successMessage.classList.remove('active');
+  
+  // Remove all error states
+  document.querySelectorAll('.form-group').forEach(group => {
+    group.classList.remove('error');
+  });
   
   // Set package if provided
   if (packageName) {
@@ -3516,8 +3741,15 @@ function closeModal() {
     const form = document.getElementById('orderForm');
     const successMessage = document.getElementById('successMessage');
     form.style.display = 'block';
+    form.style.opacity = '1';
+    form.style.transform = 'translateY(0)';
     successMessage.classList.remove('active');
     form.reset();
+    
+    // Remove all error states
+    document.querySelectorAll('.form-group').forEach(group => {
+      group.classList.remove('error');
+    });
     
     // Remove error states and error messages
     document.querySelectorAll('.form-group').forEach(group => {
@@ -3563,7 +3795,12 @@ function validateForm() {
   
   // Remove all error states first
   document.querySelectorAll('.form-group').forEach(group => {
+    const wasError = group.classList.contains('error');
     group.classList.remove('error');
+    // Trigger reflow for animation
+    if (wasError) {
+      void group.offsetWidth;
+    }
   });
   
   // Validate required fields
@@ -3571,15 +3808,29 @@ function validateForm() {
     const group = field.closest('.form-group');
     if (!group) return;
     
+    const hadError = group.classList.contains('error');
+    let isFieldError = false;
+    
     if (!field.value.trim()) {
-      group.classList.add('error');
+      isFieldError = true;
       isValid = false;
     } else if (field.type === 'email' && !isValidEmail(field.value)) {
-      group.classList.add('error');
+      isFieldError = true;
       isValid = false;
     } else if (field.type === 'tel' && field.value.trim().length < 8) {
-      group.classList.add('error');
+      isFieldError = true;
       isValid = false;
+    }
+    
+    if (isFieldError && !hadError) {
+      // New error - trigger shake animation
+      group.classList.add('error', 'shake');
+      // Remove shake class after animation
+      setTimeout(() => {
+        group.classList.remove('shake');
+      }, 500);
+    } else if (isFieldError) {
+      group.classList.add('error');
     }
   });
   
@@ -3771,19 +4022,32 @@ Verzonden via prijstabel website
         });
       }
       
-      // Show success message
+      // Show success message with enhanced animation
       const formElement = document.getElementById('modalForm');
       const successMessage = document.getElementById('successMessage');
       
-      formElement.style.display = 'none';
-      successMessage.classList.add('active');
+      // Hide form with fade out
+      formElement.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+      formElement.style.opacity = '0';
+      formElement.style.transform = 'translateY(-10px)';
       
-      // Reset button with success animation
+      setTimeout(() => {
+        formElement.style.display = 'none';
+        // Show success message
+        successMessage.classList.add('active');
+        // Trigger confetti or celebration effect
+        createSuccessCelebration();
+      }, 300);
+      
+      // Reset button with enhanced success animation
       submitButton.disabled = false;
       submitButton.classList.remove('loading');
-      submitButton.textContent = originalText;
+      submitButton.textContent = '✓ Verzonden!';
       submitButton.classList.add('success-animation');
-      setTimeout(() => submitButton.classList.remove('success-animation'), 600);
+      setTimeout(() => {
+        submitButton.classList.remove('success-animation');
+        submitButton.textContent = originalText;
+      }, 800);
       
       // Auto close after 5 seconds
       setTimeout(() => {
@@ -3876,6 +4140,68 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 });
+
+/**
+ * Create Success Celebration Effect
+ * Adds visual celebration particles when form is successfully submitted
+ */
+function createSuccessCelebration() {
+  'use strict';
+  
+  const successMessage = document.getElementById('successMessage');
+  if (!successMessage) return;
+  
+  const icon = successMessage.querySelector('.success-icon');
+  if (!icon) return;
+  
+  // Create celebration particles
+  const colors = ['#10b981', '#059669', '#34d399', '#6ee7b7'];
+  const particleCount = 12;
+  
+  for (let i = 0; i < particleCount; i++) {
+    const particle = document.createElement('div');
+    particle.style.cssText = `
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      background: ${colors[i % colors.length]};
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 1000;
+      box-shadow: 0 0 8px ${colors[i % colors.length]};
+    `;
+    
+    const angle = (Math.PI * 2 * i) / particleCount;
+    const distance = 60 + Math.random() * 40;
+    const x = Math.cos(angle) * distance;
+    const y = Math.sin(angle) * distance;
+    const duration = 0.8 + Math.random() * 0.4;
+    
+    const iconRect = icon.getBoundingClientRect();
+    const iconCenterX = iconRect.left + iconRect.width / 2;
+    const iconCenterY = iconRect.top + iconRect.height / 2;
+    
+    particle.style.left = iconCenterX + 'px';
+    particle.style.top = iconCenterY + 'px';
+    particle.style.transform = 'translate(-50%, -50%)';
+    
+    document.body.appendChild(particle);
+    
+    // Animate particle
+    requestAnimationFrame(() => {
+      particle.style.transition = `transform ${duration}s ease-out, opacity ${duration}s ease-out`;
+      particle.style.transform = `translate(calc(-50% + ${x}px), calc(-50% + ${y}px))`;
+      particle.style.opacity = '0';
+    });
+    
+    // Remove particle after animation
+    setTimeout(() => {
+      if (particle.parentNode) {
+        particle.remove();
+      }
+    }, duration * 1000);
+  }
+}
 
 // Countdown Timer
 /**
@@ -4071,21 +4397,23 @@ document.addEventListener('DOMContentLoaded', function() {
   const section = document.querySelector('.maintenance-section');
   if (!section) return;
 
+  // Op mobiel: maak section altijd direct zichtbaar, geen animatie
+  const isMobile = window.innerWidth <= 767;
+  if (isMobile) {
+    section.style.transform = 'none';
+    section.style.opacity = '1';
+    section.style.visibility = 'visible';
+    section.style.pointerEvents = 'auto';
+    document.body.classList.add('maintenance-active');
+    return; // Skip animatie op mobiel
+  }
+
   // Browser fallback: als IntersectionObserver niet beschikbaar is, skip animatie
   if (!('IntersectionObserver' in window)) {
-    // Op mobiel: maak section direct zichtbaar als fallback
-    if (window.innerWidth <= 767) {
-      section.style.transform = 'none';
-      section.style.opacity = '1';
-    }
     return;
   }
 
-  // Alleen animatie op mobiel
-  const isMobile = window.innerWidth <= 767;
-  if (!isMobile) return; // Skip op desktop
-
-  // Lagere threshold op mobiel voor betere detectie
+  // Alleen animatie op desktop (als er animatie nodig is)
   const threshold = 0.1;
 
   const observer = new IntersectionObserver(function(entries) {
@@ -4375,22 +4703,53 @@ document.addEventListener('DOMContentLoaded', function() {
   // ============================================
   const heroSub = document.querySelector('.hero-sub');
   if (heroSub && !prefersReducedMotion) {
-    const text = heroSub.innerHTML;
-    // Split text into words, preserving HTML tags
-    const words = text.split(/(\s+|<[^>]+>)/);
-    let delay = 0.2; // Start after hero title animation
+    const originalHTML = heroSub.innerHTML;
     
-    heroSub.innerHTML = words.map(function(word) {
-      if (word.trim() && !word.match(/^<[^>]+>$/)) {
+    // Verberg strikethrough eerst door een placeholder te gebruiken
+    const placeholder = '___STRIKETHROUGH_PLACEHOLDER___';
+    const textWithPlaceholder = originalHTML.replace(/<span class="price-strikethrough">(.*?)<\/span>/, placeholder);
+    
+    // Split text into words, preserving HTML tags
+    const words = textWithPlaceholder.split(/(\s+|<[^>]+>)/);
+    let delay = 0.2; // Start after hero title animation
+    let maxDelay = delay;
+    
+    const animatedHTML = words.map(function(word) {
+      if (word === placeholder) {
+        // Plaats strikethrough terug (verborgen)
+        return '<span class="price-strikethrough strikethrough-hidden">€750</span>';
+      } else if (word.trim() && !word.match(/^<[^>]+>$/)) {
         // It's a word, wrap it
         const span = '<span class="word" style="animation-delay: ' + delay + 's">' + word + '</span>';
         delay += 0.05; // 50ms delay between words
+        maxDelay = delay;
         return span;
       } else {
         // It's whitespace or HTML tag, keep as is
         return word;
       }
     }).join('');
+    
+    heroSub.innerHTML = animatedHTML;
+    
+    // Bereken wanneer de animatie klaar is en toon dan de strikethrough
+    const animationDuration = 0.6; // duration van wordFadeIn
+    const totalDelay = (maxDelay + animationDuration) * 1000;
+    
+    setTimeout(function() {
+      const strikethroughElement = heroSub.querySelector('.price-strikethrough');
+      if (strikethroughElement) {
+        strikethroughElement.classList.remove('strikethrough-hidden');
+        strikethroughElement.classList.add('strikethrough-visible');
+      }
+    }, totalDelay);
+  } else if (heroSub) {
+    // Als animatie uitgeschakeld is, toon strikethrough direct
+    const strikethrough = heroSub.querySelector('.price-strikethrough');
+    if (strikethrough) {
+      strikethrough.classList.remove('strikethrough-hidden');
+      strikethrough.classList.add('strikethrough-visible');
+    }
   }
   
   // ============================================
