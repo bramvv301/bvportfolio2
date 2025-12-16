@@ -1,0 +1,9 @@
+{
+  "rewrites": [
+    {
+      "source": "/conversie-sheet",
+      "destination": "/conversie-sheet.html"
+    }
+  ]
+}
+
