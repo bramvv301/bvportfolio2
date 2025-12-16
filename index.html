@@ -1103,6 +1103,67 @@
     font-weight: 600;
     text-shadow: 0 0 10px rgba(255, 193, 7, 0.5);
   }
+  /* Hero Arrow Link */
+  .hero-arrow-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 32px;
+    padding: 16px 32px;
+    background: rgba(88, 102, 255, 0.15);
+    border: 1px solid rgba(111, 125, 255, 0.3);
+    border-radius: 50px;
+    color: #b8c4ff;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 600;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    opacity: 0;
+    transform: translateY(10px);
+    animation: heroFadeUp 0.9s ease-out 0.3s forwards;
+  }
+  @media (min-width: 375px) {
+    .hero-arrow-link {
+      font-size: 17px;
+      padding: 18px 36px;
+    }
+  }
+  @media (min-width: 768px) {
+    .hero-arrow-link {
+      font-size: 18px;
+      padding: 20px 40px;
+      margin-top: 40px;
+    }
+  }
+  .hero-arrow-link:hover {
+    background: rgba(88, 102, 255, 0.25);
+    border-color: rgba(111, 125, 255, 0.5);
+    color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 12px 32px rgba(88, 102, 255, 0.4), 0 0 20px rgba(88, 102, 255, 0.3);
+  }
+  .hero-arrow-link .arrow-icon {
+    width: 20px;
+    height: 20px;
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    display: inline-block;
+  }
+  @media (min-width: 768px) {
+    .hero-arrow-link .arrow-icon {
+      width: 24px;
+      height: 24px;
+    }
+  }
+  .hero-arrow-link:hover .arrow-icon {
+    transform: translateX(6px);
+  }
+  .hero-arrow-link .arrow-icon svg {
+    width: 100%;
+    height: 100%;
+    fill: currentColor;
+  }
   /* Firework Hover Animation */
   .firework-tag {
     position: relative;
@@ -3141,6 +3202,14 @@
     Jij krijgt een moderne, snelle website die volledig van jou is <br> zonder abonnement of verborgen kosten.<br><br>
     Laten we zorgen dat jij <span class="firework-tag">knallend 2026</span> ingaat met een website die echt werkt voor jouw bedrijf.  Jij een frisse start, ik een mooi project erbij. <span class="hero-highlight">Perfect toch?</span>
   </p>
+  <a href="/conversie-sheet" class="hero-arrow-link">
+    <span>Bekijk Conversie Sheet</span>
+    <span class="arrow-icon">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </span>
+  </a>
 </div>
 
 <div class="pricing-container">
@@ -3477,7 +3546,7 @@
       <div class="title" style="min-height:auto; margin-bottom:8px;">Priority</div>
       <div style="font-size:26px; font-weight:700; margin-bottom:24px; color:#ffffff;">€49,99 <small style="font-size:15px; opacity:0.7;">/ maand</small></div>
       <ul>
-        <li><svg><circle cx="9" cy="9" r="9" /></svg>Voorrang bij support<br>— nooit wachten</li>
+        <li><svg><circle cx="9" cy="9" r="9" /></svg>Voorrang bij support, nooit wachten</li>
         <li><svg><circle cx="9" cy="9" r="9" /></svg>Maandelijkse UX- & contentverbeteringen</li>
         <li><svg><circle cx="9" cy="9" r="9" /></svg>Uitgebreid beveiligingspakket (extra bescherming)</li>
         <li><svg><circle cx="9" cy="9" r="9" /></svg>Feature-wijzigingen maandelijks inbegrepen</li>
