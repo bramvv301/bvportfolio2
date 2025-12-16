@@ -203,6 +203,23 @@
       gap: 32px;
     }
   }
+  /* Centered single card container */
+  .pricing-container-single {
+    display: grid;
+    grid-template-columns: 1fr;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+  @media (min-width: 768px) {
+    .pricing-container-single {
+      max-width: 550px;
+    }
+  }
+  @media (min-width: 1024px) {
+    .pricing-container-single {
+      max-width: 600px;
+    }
+  }
   .card {
     background: rgba(10, 10, 18, 0.72);
     border-radius: 20px;
@@ -700,7 +717,7 @@
     display: inline-block;
     opacity: 0;
     transform: translateY(10px);
-    animation: wordFadeIn 0.6s ease-out forwards;
+    animation: wordFadeIn 0.8s ease-out forwards;
   }
   @keyframes wordFadeIn {
     to {
@@ -1205,7 +1222,7 @@
   </p>
 </div>
 
-<section class="pricing-container">
+<section class="pricing-container pricing-container-single">
 
   <div class="card">
     <div class="title">Conversie Sheet<br><small class='subtitle'>Uitgebreide analyse van jouw website<br>met minimaal 10 verbeterpunten</small></div>
@@ -1500,13 +1517,13 @@
     
     // Split text into words, preserving HTML tags
     const words = originalHTML.split(/(\s+|<[^>]+>)/);
-    let delay = 0.2; // Start after hero title animation
+    let delay = 0.3; // Start after hero title animation (increased for slower start)
     
     const animatedHTML = words.map(function(word) {
       if (word.trim() && !word.match(/^<[^>]+>$/)) {
         // It's a word, wrap it
         const span = '<span class="word" style="animation-delay: ' + delay + 's">' + word + '</span>';
-        delay += 0.05; // 50ms delay between words
+        delay += 0.12; // 120ms delay between words (increased from 50ms for slower, more readable pace)
         return span;
       } else {
         // It's whitespace or HTML tag, keep as is
