@@ -471,6 +471,11 @@
       margin-bottom: 14px;
     }
   }
+  @media (min-width: 768px) {
+    li {
+      font-size: 15px;
+    }
+  }
   li:last-child {
     margin-bottom: 0;
   }
@@ -1225,6 +1230,212 @@
     max-width: 300px;
     margin: 0 auto;
   }
+  /* ============================================
+     EXPAND BUTTON IN FEATURE CARDS
+     ============================================ */
+  .card-expand-btn {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: rgba(88, 102, 255, 0.2);
+    border: 1px solid rgba(111, 125, 255, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 10;
+    backdrop-filter: blur(10px) saturate(180%);
+    box-shadow: 0 2px 8px rgba(88, 102, 255, 0.2);
+  }
+  .card-expand-btn:hover {
+    background: rgba(88, 102, 255, 0.3);
+    border-color: rgba(111, 125, 255, 0.6);
+    transform: scale(1.1);
+    box-shadow: 0 4px 12px rgba(88, 102, 255, 0.3);
+  }
+  .card-expand-btn:active {
+    transform: scale(0.95);
+  }
+  .card-expand-btn svg {
+    width: 16px;
+    height: 16px;
+    fill: #5866ff;
+    transition: transform 0.3s ease;
+  }
+  .card-expand-btn:hover svg {
+    transform: translateY(2px);
+  }
+  @media (min-width: 375px) {
+    .card-expand-btn {
+      top: 18px;
+      right: 18px;
+      width: 34px;
+      height: 34px;
+    }
+    .card-expand-btn svg {
+      width: 17px;
+      height: 17px;
+    }
+  }
+  @media (min-width: 768px) {
+    .card-expand-btn {
+      top: 20px;
+      right: 20px;
+      width: 36px;
+      height: 36px;
+    }
+    .card-expand-btn svg {
+      width: 18px;
+      height: 18px;
+    }
+  }
+  /* ============================================
+     MODAL OVERLAY
+     ============================================ */
+  .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(8px);
+    z-index: 9998;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+  }
+  .modal-overlay.active {
+    opacity: 1;
+    visibility: visible;
+  }
+  /* ============================================
+     MODAL CONTAINER
+     ============================================ */
+  .modal-container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.9);
+    max-width: 600px;
+    width: 90%;
+    max-height: 80vh;
+    background: rgba(10, 10, 18, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 24px;
+    padding: 32px;
+    z-index: 9999;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow-y: auto;
+    backdrop-filter: blur(26px) saturate(145%);
+    box-shadow: 0 22px 60px rgba(0, 0, 0, 0.8), 0 0 40px rgba(88, 102, 255, 0.2);
+  }
+  .modal-container.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  @media (max-width: 767px) {
+    .modal-container {
+      padding: 24px;
+      max-height: 85vh;
+      width: 95%;
+      border-radius: 20px;
+    }
+  }
+  /* ============================================
+     MODAL HEADER
+     ============================================ */
+  .modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  .modal-title {
+    font-size: 24px;
+    font-weight: 700;
+    color: #ffffff;
+    margin: 0;
+    line-height: 1.3;
+    letter-spacing: -0.02em;
+    flex: 1;
+  }
+  @media (max-width: 767px) {
+    .modal-title {
+      font-size: 20px;
+    }
+  }
+  .modal-close-btn {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+    margin-left: 16px;
+  }
+  .modal-close-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.3);
+    transform: rotate(90deg);
+  }
+  .modal-close-btn:active {
+    transform: rotate(90deg) scale(0.95);
+  }
+  .modal-close-btn svg {
+    width: 18px;
+    height: 18px;
+    fill: #ffffff;
+  }
+  /* ============================================
+     MODAL CONTENT
+     ============================================ */
+  .modal-content {
+    color: #e5e5e7;
+    line-height: 1.7;
+    font-size: 16px;
+  }
+  .modal-content p {
+    margin: 0 0 16px;
+  }
+  .modal-content p:last-child {
+    margin-bottom: 0;
+  }
+  .modal-content strong {
+    color: #ffffff;
+    font-weight: 600;
+  }
+  .modal-content ul {
+    margin: 16px 0;
+    padding-left: 24px;
+    list-style: disc;
+  }
+  .modal-content li {
+    margin-bottom: 8px;
+    color: #e5e5e7;
+  }
+  .modal-content li:last-child {
+    margin-bottom: 0;
+  }
+  @media (max-width: 767px) {
+    .modal-content {
+      font-size: 15px;
+    }
+  }
 </style>
 </head>
 <body>
@@ -1265,6 +1476,11 @@
 
 <section class="pricing-container" style="margin-top: 60px;">
   <div class="card">
+    <button class="card-expand-btn" data-modal="feature-1" aria-label="Meer informatie over Call-to-Action optimalisatie">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M7 10L12 15L17 10" stroke="#5866ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
     <div class="title"><span class="feature-number">1</span><span class="title-text">Call-to-Action optimalisatie<br><small class='subtitle'>Stuur aan op klikken.</small></span></div>
     <ul>
       <li><svg><circle cx="9" cy="9" r="9" /></svg>We analyseren je huidige CTA's en geven gerichte tips om ze duidelijker en overtuigender te maken. Denk aan verbeteringen in tekst, kleur en plaatsing per pagina.</li>
@@ -1272,6 +1488,11 @@
   </div>
 
   <div class="card">
+    <button class="card-expand-btn" data-modal="feature-2" aria-label="Meer informatie over Website snelheid & performance">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M7 10L12 15L17 10" stroke="#5866ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
     <div class="title"><span class="feature-number">2</span><span class="title-text">Website snelheid & performance<br><small class='subtitle'>Voorkom dat traagheid je conversies kost.</small></span></div>
     <ul>
       <li><svg><circle cx="9" cy="9" r="9" /></svg>We laten zien welke onderdelen je site vertragen en hoe je dat oplost. Met concrete optimalisaties die je zelf kunt toepassen, maak je je website sneller én gebruiksvriendelijker.</li>
@@ -1279,6 +1500,11 @@
   </div>
 
   <div class="card">
+    <button class="card-expand-btn" data-modal="feature-3" aria-label="Meer informatie over Mobiele gebruikerservaring">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M7 10L12 15L17 10" stroke="#5866ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
     <div class="title"><span class="feature-number">3</span><span class="title-text">Mobiele gebruikerservaring<br><small class='subtitle'>Maak je site gebruiksvriendelijk voor mobiel bezoek.</small></span></div>
     <ul>
       <li><svg><circle cx="9" cy="9" r="9" /></svg>We bekijken waar de mobiele ervaring beter kan, van navigatie tot touch-interactie. Je krijgt praktische tips voor een soepele en consistente beleving op elk schermformaat.</li>
@@ -1286,6 +1512,11 @@
   </div>
 
   <div class="card">
+    <button class="card-expand-btn" data-modal="feature-4" aria-label="Meer informatie over Formulier Optimalisatie">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M7 10L12 15L17 10" stroke="#5866ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
     <div class="title"><span class="feature-number">4</span><span class="title-text">Formulier Optimalisatie<br><small class='subtitle'>Verminder afhakers en verhoog formulier conversies</small></span></div>
     <ul>
       <li><svg><circle cx="9" cy="9" r="9" /></svg>Veld optimalisaties</li>
@@ -1295,6 +1526,11 @@
   </div>
 
   <div class="card">
+    <button class="card-expand-btn" data-modal="feature-5" aria-label="Meer informatie over Social Proof Implementatie">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M7 10L12 15L17 10" stroke="#5866ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
     <div class="title"><span class="feature-number">5</span><span class="title-text">Social Proof Implementatie<br><small class='subtitle'>Bouw vertrouwen met testimonials en reviews</small></span></div>
     <ul>
       <li><svg><circle cx="9" cy="9" r="9" /></svg>Beste plaatsen voor social proof</li>
@@ -1304,6 +1540,11 @@
   </div>
 
   <div class="card">
+    <button class="card-expand-btn" data-modal="feature-6" aria-label="Meer informatie over Content Structuur & Leesbaarheid">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M7 10L12 15L17 10" stroke="#5866ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
     <div class="title"><span class="feature-number">6</span><span class="title-text">Content Structuur & Leesbaarheid<br><small class='subtitle'>Verbeter de leesbaarheid en scanbaarheid</small></span></div>
     <ul>
       <li><svg><circle cx="9" cy="9" r="9" /></svg>Tekst hierarchie optimalisaties</li>
@@ -1313,6 +1554,11 @@
   </div>
 
   <div class="card">
+    <button class="card-expand-btn" data-modal="feature-7" aria-label="Meer informatie over Trust Signals & Certificeringen">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M7 10L12 15L17 10" stroke="#5866ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
     <div class="title"><span class="feature-number">7</span><span class="title-text">Trust Signals & Certificeringen<br><small class='subtitle'>Bouw vertrouwen met bewijs en certificeringen</small></span></div>
     <ul>
       <li><svg><circle cx="9" cy="9" r="9" /></svg>Beste plaatsen voor trust signals</li>
@@ -1322,6 +1568,11 @@
   </div>
 
   <div class="card">
+    <button class="card-expand-btn" data-modal="feature-8" aria-label="Meer informatie over Navigatie & User Flow">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M7 10L12 15L17 10" stroke="#5866ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
     <div class="title"><span class="feature-number">8</span><span class="title-text">Navigatie & User Flow<br><small class='subtitle'>Verbeter de gebruikerservaring en navigatie</small></span></div>
     <ul>
       <li><svg><circle cx="9" cy="9" r="9" /></svg>Menu structuur optimalisaties</li>
@@ -1331,6 +1582,11 @@
   </div>
 
   <div class="card">
+    <button class="card-expand-btn" data-modal="feature-9" aria-label="Meer informatie over Pagina Snelheid & Performance">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M7 10L12 15L17 10" stroke="#5866ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
     <div class="title"><span class="feature-number">9</span><span class="title-text">Pagina Snelheid & Performance<br><small class='subtitle'>Optimaliseer voor betere performance</small></span></div>
     <ul>
       <li><svg><circle cx="9" cy="9" r="9" /></svg>Afbeelding optimalisatie tips</li>
@@ -1383,6 +1639,226 @@
   <a href="mailto:bramvanveenendaal1@gmail.com?subject=Conversie Sheet Aanvraag&body=Hoi,%0D%0A%0D%0AIk ben geïnteresseerd in de conversie sheet ter waarde van €175.%0D%0A%0D%0AMijn website is: [VUL HIER JE WEBSITE IN]%0D%0A%0D%0AGroetjes" class="cta">Bestel Nu via Email</a>
 </section>
 
+</div>
+
+<!-- Modal Overlay -->
+<div class="modal-overlay" id="modal-overlay" aria-hidden="true"></div>
+
+<!-- Feature Modals -->
+<div class="modal-container" id="modal-feature-1" role="dialog" aria-labelledby="modal-title-1" aria-hidden="true">
+  <div class="modal-header">
+    <h3 class="modal-title" id="modal-title-1">Call-to-Action optimalisatie</h3>
+    <button class="modal-close-btn" aria-label="Sluiten">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+    </button>
+  </div>
+  <div class="modal-content">
+    <p><strong>Wat we analyseren:</strong></p>
+    <p>We bekijken alle call-to-action elementen op jouw website door de ogen van je bezoeker. Waar staan ze? Zijn ze duidelijk genoeg? En vooral: nodigen ze uit tot actie?</p>
+    <p><strong>Concrete verbeteringen:</strong></p>
+    <ul>
+      <li>Analyse van huidige CTA plaatsing en zichtbaarheid</li>
+      <li>Optimalisatie van tekst en formulering per pagina</li>
+      <li>Kleuren en contrast verbeteringen voor betere zichtbaarheid</li>
+      <li>Specifieke aanbevelingen voor plaatsing op elke pagina</li>
+      <li>Tips voor urgency en duidelijkheid in de boodschap</li>
+    </ul>
+    <p>Elke aanbeveling is specifiek afgestemd op jouw pagina's en doelgroep, zodat je precies weet wat je moet aanpassen en waarom.</p>
+  </div>
+</div>
+
+<div class="modal-container" id="modal-feature-2" role="dialog" aria-labelledby="modal-title-2" aria-hidden="true">
+  <div class="modal-header">
+    <h3 class="modal-title" id="modal-title-2">Website snelheid & performance</h3>
+    <button class="modal-close-btn" aria-label="Sluiten">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+    </button>
+  </div>
+  <div class="modal-content">
+    <p><strong>Wat we analyseren:</strong></p>
+    <p>Traagheid kost conversies. We identificeren precies welke onderdelen van je website de laadtijd vertragen en geven concrete oplossingen die je zelf kunt toepassen.</p>
+    <p><strong>Concrete verbeteringen:</strong></p>
+    <ul>
+      <li>Identificatie van trage elementen (afbeeldingen, scripts, fonts)</li>
+      <li>Optimalisatie tips voor afbeeldingen en media</li>
+      <li>Code optimalisaties die je zelf kunt doorvoeren</li>
+      <li>Tools en methodes voor snelheidstesten</li>
+      <li>Specifieke aanbevelingen per pagina</li>
+    </ul>
+    <p>Met deze verbeteringen maak je je website niet alleen sneller, maar ook gebruiksvriendelijker en beter voor je SEO.</p>
+  </div>
+</div>
+
+<div class="modal-container" id="modal-feature-3" role="dialog" aria-labelledby="modal-title-3" aria-hidden="true">
+  <div class="modal-header">
+    <h3 class="modal-title" id="modal-title-3">Mobiele gebruikerservaring</h3>
+    <button class="modal-close-btn" aria-label="Sluiten">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+    </button>
+  </div>
+  <div class="modal-content">
+    <p><strong>Wat we analyseren:</strong></p>
+    <p>Meer dan de helft van je bezoekers bekijkt je website op mobiel. We bekijken waar de mobiele ervaring beter kan, van navigatie tot touch-interactie.</p>
+    <p><strong>Concrete verbeteringen:</strong></p>
+    <ul>
+      <li>Mobiele navigatie en menu optimalisaties</li>
+      <li>Touch-friendly elementen en button sizes</li>
+      <li>Responsive design verbeteringen</li>
+      <li>Leesbaarheid en tekst formatting op kleine schermen</li>
+      <li>Tips voor consistente beleving op alle schermformaten</li>
+    </ul>
+    <p>Je krijgt praktische tips voor een soepele en professionele mobiele ervaring die je bezoekers helpt om sneller tot actie over te gaan.</p>
+  </div>
+</div>
+
+<div class="modal-container" id="modal-feature-4" role="dialog" aria-labelledby="modal-title-4" aria-hidden="true">
+  <div class="modal-header">
+    <h3 class="modal-title" id="modal-title-4">Formulier Optimalisatie</h3>
+    <button class="modal-close-btn" aria-label="Sluiten">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+    </button>
+  </div>
+  <div class="modal-content">
+    <p><strong>Wat we analyseren:</strong></p>
+    <p>Formulieren zijn vaak het laatste obstakel voordat een bezoeker een lead wordt. We analyseren waar bezoekers afhaken en hoe je dat voorkomt.</p>
+    <p><strong>Concrete verbeteringen:</strong></p>
+    <ul>
+      <li>Veld optimalisaties en vereiste vs. optionele velden</li>
+      <li>Formulier plaatsing en lay-out verbeteringen</li>
+      <li>Validatie en error handling optimalisaties</li>
+      <li>Progress indicators en duidelijkheid tijdens invullen</li>
+      <li>Tips voor vertrouwen en privacy communicatie</li>
+    </ul>
+    <p>Met deze aanpassingen verminder je afhakers en verhoog je je formulier conversies aanzienlijk.</p>
+  </div>
+</div>
+
+<div class="modal-container" id="modal-feature-5" role="dialog" aria-labelledby="modal-title-5" aria-hidden="true">
+  <div class="modal-header">
+    <h3 class="modal-title" id="modal-title-5">Social Proof Implementatie</h3>
+    <button class="modal-close-btn" aria-label="Sluiten">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+    </button>
+  </div>
+  <div class="modal-content">
+    <p><strong>Wat we analyseren:</strong></p>
+    <p>Social proof bouwt vertrouwen en verlaagt twijfel. We bekijken waar en hoe je testimonials, reviews en andere bewijzen het beste kunt inzetten.</p>
+    <p><strong>Concrete verbeteringen:</strong></p>
+    <ul>
+      <li>Beste plaatsen voor social proof op elke pagina</li>
+      <li>Welke elementen werken het beste (testimonials, reviews, logos, cijfers)</li>
+      <li>Implementatie tips en concrete voorbeelden</li>
+      <li>Hoe je bestaande social proof beter kunt presenteren</li>
+      <li>Tips voor authenticiteit en geloofwaardigheid</li>
+    </ul>
+    <p>Je krijgt praktische aanbevelingen om vertrouwen te bouwen op de momenten dat het er echt toe doet.</p>
+  </div>
+</div>
+
+<div class="modal-container" id="modal-feature-6" role="dialog" aria-labelledby="modal-title-6" aria-hidden="true">
+  <div class="modal-header">
+    <h3 class="modal-title" id="modal-title-6">Content Structuur & Leesbaarheid</h3>
+    <button class="modal-close-btn" aria-label="Sluiten">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+    </button>
+  </div>
+  <div class="modal-content">
+    <p><strong>Wat we analyseren:</strong></p>
+    <p>Goede content is niets waard als bezoekers het niet kunnen lezen of scannen. We bekijken de structuur en leesbaarheid van je teksten.</p>
+    <p><strong>Concrete verbeteringen:</strong></p>
+    <ul>
+      <li>Tekst hierarchie en heading structuur optimalisaties</li>
+      <li>Whitespace en spacing verbeteringen voor betere leesbaarheid</li>
+      <li>Scannable content tips (bullet points, korte alinea's)</li>
+      <li>Font sizes en line-height optimalisaties</li>
+      <li>Tips voor betere informatie architectuur</li>
+    </ul>
+    <p>Met deze aanpassingen maak je je content veel toegankelijker en help je bezoekers sneller te vinden wat ze zoeken.</p>
+  </div>
+</div>
+
+<div class="modal-container" id="modal-feature-7" role="dialog" aria-labelledby="modal-title-7" aria-hidden="true">
+  <div class="modal-header">
+    <h3 class="modal-title" id="modal-title-7">Trust Signals & Certificeringen</h3>
+    <button class="modal-close-btn" aria-label="Sluiten">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+    </button>
+  </div>
+  <div class="modal-content">
+    <p><strong>Wat we analyseren:</strong></p>
+    <p>Certificeringen, keurmerken en andere trust signals helpen bezoekers om vertrouwen te krijgen. We bekijken waar en hoe je deze het beste kunt inzetten.</p>
+    <p><strong>Concrete verbeteringen:</strong></p>
+    <ul>
+      <li>Beste plaatsen voor trust signals op elke pagina</li>
+      <li>Welke elementen werken het beste voor jouw doelgroep</li>
+      <li>Implementatie suggesties en concrete voorbeelden</li>
+      <li>Hoe je bestaande certificeringen beter kunt presenteren</li>
+      <li>Tips voor authenticiteit en zichtbaarheid</li>
+    </ul>
+    <p>Je krijgt praktische aanbevelingen om vertrouwen te bouwen op de momenten dat bezoekers twijfelen.</p>
+  </div>
+</div>
+
+<div class="modal-container" id="modal-feature-8" role="dialog" aria-labelledby="modal-title-8" aria-hidden="true">
+  <div class="modal-header">
+    <h3 class="modal-title" id="modal-title-8">Navigatie & User Flow</h3>
+    <button class="modal-close-btn" aria-label="Sluiten">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+    </button>
+  </div>
+  <div class="modal-content">
+    <p><strong>Wat we analyseren:</strong></p>
+    <p>Een goede navigatie helpt bezoekers om snel te vinden wat ze zoeken. We bekijken de structuur en flow van je website door de ogen van je bezoeker.</p>
+    <p><strong>Concrete verbeteringen:</strong></p>
+    <ul>
+      <li>Menu structuur en organisatie optimalisaties</li>
+      <li>User flow verbeteringen voor betere conversie</li>
+      <li>Breadcrumbs en navigatie hulpmiddelen</li>
+      <li>Tips voor duidelijke call-to-action paden</li>
+      <li>Optimalisaties voor verschillende bezoeker types</li>
+    </ul>
+    <p>Met deze aanpassingen help je bezoekers sneller te navigeren en verhoog je de kans dat ze de gewenste actie ondernemen.</p>
+  </div>
+</div>
+
+<div class="modal-container" id="modal-feature-9" role="dialog" aria-labelledby="modal-title-9" aria-hidden="true">
+  <div class="modal-header">
+    <h3 class="modal-title" id="modal-title-9">Pagina Snelheid & Performance</h3>
+    <button class="modal-close-btn" aria-label="Sluiten">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+    </button>
+  </div>
+  <div class="modal-content">
+    <p><strong>Wat we analyseren:</strong></p>
+    <p>Performance heeft directe invloed op conversie. We identificeren welke technische aspecten je pagina's vertragen en geven concrete optimalisaties.</p>
+    <p><strong>Concrete verbeteringen:</strong></p>
+    <ul>
+      <li>Afbeelding optimalisatie tips en tools</li>
+      <li>Code optimalisaties die je zelf kunt doorvoeren</li>
+      <li>Caching en CDN suggesties</li>
+      <li>Script loading optimalisaties</li>
+      <li>Specifieke aanbevelingen per pagina type</li>
+    </ul>
+    <p>Met deze verbeteringen maak je je website sneller, wat direct leidt tot betere gebruikerservaring en hogere conversies.</p>
+  </div>
 </div>
 
 <script>
@@ -1548,6 +2024,132 @@
     document.documentElement.style.scrollBehavior = 'smooth';
   }
   
+  // ============================================
+  // MODAL FUNCTIONALITY
+  // ============================================
+  const expandButtons = document.querySelectorAll('.card-expand-btn');
+  const modalOverlay = document.getElementById('modal-overlay');
+  let activeModal = null;
+  let activeExpandButton = null;
+
+  // Open modal function
+  function openModal(modalId, expandButton) {
+    const modal = document.getElementById('modal-' + modalId);
+    
+    if (modal && modalOverlay) {
+      activeModal = modal;
+      activeExpandButton = expandButton;
+      
+      // Set ARIA attributes
+      modal.setAttribute('aria-hidden', 'false');
+      modalOverlay.setAttribute('aria-hidden', 'false');
+      
+      // Show modal and overlay
+      modal.classList.add('active');
+      modalOverlay.classList.add('active');
+      
+      // Lock body scroll
+      document.body.style.overflow = 'hidden';
+      
+      // Focus on modal (for accessibility)
+      const closeBtn = modal.querySelector('.modal-close-btn');
+      if (closeBtn) {
+        setTimeout(function() {
+          closeBtn.focus();
+        }, 100);
+      }
+    }
+  }
+
+  // Close modal function
+  function closeAllModals() {
+    const modals = document.querySelectorAll('.modal-container');
+    modals.forEach(function(modal) {
+      modal.classList.remove('active');
+      modal.setAttribute('aria-hidden', 'true');
+    });
+    
+    if (modalOverlay) {
+      modalOverlay.classList.remove('active');
+      modalOverlay.setAttribute('aria-hidden', 'true');
+    }
+    
+    // Unlock body scroll
+    document.body.style.overflow = '';
+    
+    // Return focus to expand button
+    if (activeExpandButton) {
+      setTimeout(function() {
+        activeExpandButton.focus();
+      }, 100);
+    }
+    
+    activeModal = null;
+    activeExpandButton = null;
+  }
+
+  // Event listeners for expand buttons
+  expandButtons.forEach(function(button) {
+    button.addEventListener('click', function(e) {
+      e.stopPropagation();
+      const modalId = this.getAttribute('data-modal');
+      if (modalId) {
+        openModal(modalId, this);
+      }
+    });
+  });
+
+  // Close modal when clicking overlay
+  if (modalOverlay) {
+    modalOverlay.addEventListener('click', function(e) {
+      if (e.target === modalOverlay) {
+        closeAllModals();
+      }
+    });
+  }
+
+  // Close modal when clicking close button
+  const closeButtons = document.querySelectorAll('.modal-close-btn');
+  closeButtons.forEach(function(button) {
+    button.addEventListener('click', function(e) {
+      e.stopPropagation();
+      closeAllModals();
+    });
+  });
+
+  // Close modal with Escape key
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && activeModal) {
+      closeAllModals();
+    }
+  });
+
+  // Focus trap in modal (for accessibility)
+  const modals = document.querySelectorAll('.modal-container');
+  modals.forEach(function(modal) {
+    const focusableElements = modal.querySelectorAll(
+      'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+    );
+    const firstElement = focusableElements[0];
+    const lastElement = focusableElements[focusableElements.length - 1];
+
+    modal.addEventListener('keydown', function(e) {
+      if (e.key === 'Tab') {
+        if (e.shiftKey) {
+          if (document.activeElement === firstElement) {
+            e.preventDefault();
+            lastElement.focus();
+          }
+        } else {
+          if (document.activeElement === lastElement) {
+            e.preventDefault();
+            firstElement.focus();
+          }
+        }
+      }
+    });
+  });
+
   // ============================================
   // FIREWORK SPARKLES
   // ============================================
