@@ -357,7 +357,10 @@
     margin-top: 8px;
     line-height: 1.5;
     white-space: normal;
-    display: inline;
+    display: block;
+    max-width: 100%;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
   }
   @media (min-width: 320px) {
     .subtitle {
@@ -369,6 +372,12 @@
   @media (min-width: 375px) {
     .subtitle {
       font-size: 13px;
+    }
+  }
+  @media (min-width: 768px) {
+    .subtitle {
+      font-size: 14px;
+      line-height: 1.65;
     }
   }
   .price {
@@ -1378,8 +1387,8 @@
     width: 32px;
     height: 32px;
     border-radius: 50%;
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: rgba(88, 102, 255, 0.2);
+    border: 1px solid rgba(111, 125, 255, 0.4);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1389,9 +1398,10 @@
     margin-left: 16px;
   }
   .modal-close-btn:hover {
-    background: rgba(255, 255, 255, 0.2);
-    border-color: rgba(255, 255, 255, 0.3);
+    background: rgba(88, 102, 255, 0.3);
+    border-color: rgba(111, 125, 255, 0.6);
     transform: rotate(90deg);
+    box-shadow: 0 2px 8px rgba(88, 102, 255, 0.3);
   }
   .modal-close-btn:active {
     transform: rotate(90deg) scale(0.95);
@@ -1399,7 +1409,8 @@
   .modal-close-btn svg {
     width: 18px;
     height: 18px;
-    fill: #ffffff;
+    fill: #5866ff;
+    stroke: #5866ff;
   }
   /* ============================================
      MODAL CONTENT
@@ -1458,7 +1469,7 @@
 <section class="pricing-container pricing-container-single">
 
   <div class="card">
-    <div class="title">Conversie Sheet<br><small class='subtitle'>Een gerichte analyse van jouw website<br>met minimaal 10 concrete verbeterpunten</small></div>
+    <div class="title">Conversie Sheet<br><small class='subtitle'>Een gerichte analyse van jouw website met minimaal 10 concrete verbeterpunten</small></div>
     <div class="price">€175 <small>/ eenmalig</small></div>
     <ul>
       <li><svg><circle cx="9" cy="9" r="9" /></svg>Minimaal 10 concrete verbeterpunten, direct toepasbaar op jouw website</li>
@@ -1517,39 +1528,33 @@
         <path d="M7 10L12 15L17 10" stroke="#5866ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
       </svg>
     </button>
-    <div class="title"><span class="feature-number">4</span><span class="title-text">Formulier Optimalisatie<br><small class='subtitle'>Verminder afhakers en verhoog formulier conversies</small></span></div>
+    <div class="title"><span class="feature-number">4</span><span class="title-text">Formulieroptimalisatie<br><small class='subtitle'>Voorkom afhakers en maak formulieren laagdrempelig.</small></span></div>
     <ul>
-      <li><svg><circle cx="9" cy="9" r="9" /></svg>Veld optimalisaties</li>
-      <li><svg><circle cx="9" cy="9" r="9" /></svg>Formulier plaatsing en lay-out</li>
-      <li><svg><circle cx="9" cy="9" r="9" /></svg>Validatie en error handling verbeteringen</li>
+      <li><svg><circle cx="9" cy="9" r="9" /></svg>We bekijken velden, volgorde en lengte, en geven tips voor betere plaatsing, heldere foutmeldingen en soepel invullen.</li>
     </ul>
   </div>
 
   <div class="card">
-    <button class="card-expand-btn" data-modal="feature-5" aria-label="Meer informatie over Social Proof Implementatie">
+    <button class="card-expand-btn" data-modal="feature-5" aria-label="Meer informatie over Social proof & vertrouwen">
       <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M7 10L12 15L17 10" stroke="#5866ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
       </svg>
     </button>
-    <div class="title"><span class="feature-number">5</span><span class="title-text">Social Proof Implementatie<br><small class='subtitle'>Bouw vertrouwen met testimonials en reviews</small></span></div>
+    <div class="title"><span class="feature-number">5</span><span class="title-text">Social proof & vertrouwen<br><small class='subtitle'>Vergroot vertrouwen met bewijs op het juiste moment.</small></span></div>
     <ul>
-      <li><svg><circle cx="9" cy="9" r="9" /></svg>Beste plaatsen voor social proof</li>
-      <li><svg><circle cx="9" cy="9" r="9" /></svg>Welke elementen werken het beste</li>
-      <li><svg><circle cx="9" cy="9" r="9" /></svg>Implementatie tips en voorbeelden</li>
+      <li><svg><circle cx="9" cy="9" r="9" /></svg>We adviseren waar en hoe je reviews, testimonials of klantlogo's inzet voor maximaal effect – inclusief slimme vormen van presentatie.</li>
     </ul>
   </div>
 
   <div class="card">
-    <button class="card-expand-btn" data-modal="feature-6" aria-label="Meer informatie over Content Structuur & Leesbaarheid">
+    <button class="card-expand-btn" data-modal="feature-6" aria-label="Meer informatie over Contentstructuur & leesbaarheid">
       <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M7 10L12 15L17 10" stroke="#5866ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
       </svg>
     </button>
-    <div class="title"><span class="feature-number">6</span><span class="title-text">Content Structuur & Leesbaarheid<br><small class='subtitle'>Verbeter de leesbaarheid en scanbaarheid</small></span></div>
+    <div class="title"><span class="feature-number">6</span><span class="title-text">Contentstructuur & leesbaarheid<br><small class='subtitle'>Laat bezoekers sneller snappen wat je aanbiedt.</small></span></div>
     <ul>
-      <li><svg><circle cx="9" cy="9" r="9" /></svg>Tekst hierarchie optimalisaties</li>
-      <li><svg><circle cx="9" cy="9" r="9" /></svg>Whitespace en spacing verbeteringen</li>
-      <li><svg><circle cx="9" cy="9" r="9" /></svg>Scannable content tips</li>
+      <li><svg><circle cx="9" cy="9" r="9" /></svg>We verbeteren de opbouw, hiërarchie en witruimte, zodat je content rustiger oogt, makkelijker scanbaar is en beter wordt begrepen.</li>
     </ul>
   </div>
 
@@ -1719,7 +1724,7 @@
 
 <div class="modal-container" id="modal-feature-4" role="dialog" aria-labelledby="modal-title-4" aria-hidden="true">
   <div class="modal-header">
-    <h3 class="modal-title" id="modal-title-4">Formulier Optimalisatie</h3>
+    <h3 class="modal-title" id="modal-title-4">Formulieroptimalisatie</h3>
     <button class="modal-close-btn" aria-label="Sluiten">
       <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
@@ -1728,22 +1733,22 @@
   </div>
   <div class="modal-content">
     <p><strong>Wat we analyseren:</strong></p>
-    <p>Formulieren zijn vaak het laatste obstakel voordat een bezoeker een lead wordt. We analyseren waar bezoekers afhaken en hoe je dat voorkomt.</p>
+    <p>Formulieren zijn vaak het laatste obstakel voordat een bezoeker een lead wordt. We bekijken velden, volgorde en lengte, en analyseren waar bezoekers afhaken en hoe je dat voorkomt.</p>
     <p><strong>Concrete verbeteringen:</strong></p>
     <ul>
-      <li>Veld optimalisaties en vereiste vs. optionele velden</li>
-      <li>Formulier plaatsing en lay-out verbeteringen</li>
-      <li>Validatie en error handling optimalisaties</li>
-      <li>Progress indicators en duidelijkheid tijdens invullen</li>
-      <li>Tips voor vertrouwen en privacy communicatie</li>
+      <li>Veld optimalisaties: welke velden zijn echt nodig en welke kunnen weg</li>
+      <li>Volgorde en lengte: hoe maak je formulieren laagdrempelig</li>
+      <li>Betere plaatsing: waar staan formulieren het beste</li>
+      <li>Heldere foutmeldingen: hoe help je gebruikers bij het invullen</li>
+      <li>Tips voor soepel invullen: progress indicators en duidelijkheid</li>
     </ul>
-    <p>Met deze aanpassingen verminder je afhakers en verhoog je je formulier conversies aanzienlijk.</p>
+    <p>Met deze aanpassingen voorkom je afhakers en maak je formulieren laagdrempelig, wat direct leidt tot meer conversies.</p>
   </div>
 </div>
 
 <div class="modal-container" id="modal-feature-5" role="dialog" aria-labelledby="modal-title-5" aria-hidden="true">
   <div class="modal-header">
-    <h3 class="modal-title" id="modal-title-5">Social Proof Implementatie</h3>
+    <h3 class="modal-title" id="modal-title-5">Social proof & vertrouwen</h3>
     <button class="modal-close-btn" aria-label="Sluiten">
       <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
@@ -1752,22 +1757,22 @@
   </div>
   <div class="modal-content">
     <p><strong>Wat we analyseren:</strong></p>
-    <p>Social proof bouwt vertrouwen en verlaagt twijfel. We bekijken waar en hoe je testimonials, reviews en andere bewijzen het beste kunt inzetten.</p>
+    <p>Social proof bouwt vertrouwen en verlaagt twijfel op het juiste moment. We adviseren waar en hoe je reviews, testimonials of klantlogo's inzet voor maximaal effect.</p>
     <p><strong>Concrete verbeteringen:</strong></p>
     <ul>
-      <li>Beste plaatsen voor social proof op elke pagina</li>
-      <li>Welke elementen werken het beste (testimonials, reviews, logos, cijfers)</li>
-      <li>Implementatie tips en concrete voorbeelden</li>
+      <li>Beste plaatsen voor social proof op elke pagina voor maximaal effect</li>
+      <li>Welke elementen werken het beste (reviews, testimonials, klantlogo's, cijfers)</li>
+      <li>Slimme vormen van presentatie die vertrouwen vergroten</li>
       <li>Hoe je bestaande social proof beter kunt presenteren</li>
-      <li>Tips voor authenticiteit en geloofwaardigheid</li>
+      <li>Tips voor authenticiteit en geloofwaardigheid op het juiste moment</li>
     </ul>
-    <p>Je krijgt praktische aanbevelingen om vertrouwen te bouwen op de momenten dat het er echt toe doet.</p>
+    <p>Je krijgt praktische aanbevelingen om vertrouwen te vergroten met bewijs op de momenten dat het er echt toe doet.</p>
   </div>
 </div>
 
 <div class="modal-container" id="modal-feature-6" role="dialog" aria-labelledby="modal-title-6" aria-hidden="true">
   <div class="modal-header">
-    <h3 class="modal-title" id="modal-title-6">Content Structuur & Leesbaarheid</h3>
+    <h3 class="modal-title" id="modal-title-6">Contentstructuur & leesbaarheid</h3>
     <button class="modal-close-btn" aria-label="Sluiten">
       <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
@@ -1776,16 +1781,16 @@
   </div>
   <div class="modal-content">
     <p><strong>Wat we analyseren:</strong></p>
-    <p>Goede content is niets waard als bezoekers het niet kunnen lezen of scannen. We bekijken de structuur en leesbaarheid van je teksten.</p>
+    <p>Goede content is niets waard als bezoekers het niet kunnen lezen of scannen. We verbeteren de opbouw, hiërarchie en witruimte, zodat bezoekers sneller snappen wat je aanbiedt.</p>
     <p><strong>Concrete verbeteringen:</strong></p>
     <ul>
+      <li>Opbouw en hiërarchie: hoe structureer je content voor betere begrijpelijkheid</li>
+      <li>Witruimte en spacing verbeteringen zodat content rustiger oogt</li>
+      <li>Scanbaarheid: tips voor makkelijker scannen en sneller begrijpen</li>
       <li>Tekst hierarchie en heading structuur optimalisaties</li>
-      <li>Whitespace en spacing verbeteringen voor betere leesbaarheid</li>
-      <li>Scannable content tips (bullet points, korte alinea's)</li>
-      <li>Font sizes en line-height optimalisaties</li>
-      <li>Tips voor betere informatie architectuur</li>
+      <li>Tips voor betere informatie architectuur en leesbaarheid</li>
     </ul>
-    <p>Met deze aanpassingen maak je je content veel toegankelijker en help je bezoekers sneller te vinden wat ze zoeken.</p>
+    <p>Met deze aanpassingen maak je je content rustiger, makkelijker scanbaar en beter begrijpelijk, zodat bezoekers sneller snappen wat je aanbiedt.</p>
   </div>
 </div>
 
