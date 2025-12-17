@@ -1105,59 +1105,49 @@
   }
   /* Hero Arrow Link */
   .hero-arrow-link {
-    display: inline-flex;
+    position: fixed;
+    top: 32px;
+    left: 32px;
+    width: 52px;
+    height: 52px;
+    border-radius: 999px;
+    display: flex;
     align-items: center;
-    gap: 12px;
-    margin-top: 32px;
-    padding: 16px 32px;
-    background: rgba(88, 102, 255, 0.15);
-    border: 1px solid rgba(111, 125, 255, 0.3);
-    border-radius: 50px;
-    color: #b8c4ff;
+    justify-content: center;
+    background: radial-gradient(circle at 30% 20%, #4a5cff, #222744);
+    border: 1px solid rgba(111, 125, 255, 0.6);
+    color: #cfd6ff;
     text-decoration: none;
-    font-size: 16px;
-    font-weight: 600;
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    backdrop-filter: blur(10px);
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), 0 0 18px rgba(88, 102, 255, 0.5);
+    backdrop-filter: blur(12px) saturate(160%);
+    transition: all 0.3s ease;
+    z-index: 1200;
     opacity: 0;
-    transform: translateY(10px);
-    animation: heroFadeUp 0.9s ease-out 0.3s forwards;
-  }
-  @media (min-width: 375px) {
-    .hero-arrow-link {
-      font-size: 17px;
-      padding: 18px 36px;
-    }
+    transform: translateY(-10px);
+    animation: heroFadeUp 0.9s ease-out 0.4s forwards;
   }
   @media (min-width: 768px) {
     .hero-arrow-link {
-      font-size: 18px;
-      padding: 20px 40px;
-      margin-top: 40px;
+      top: 40px;
+      left: 40px;
+      width: 56px;
+      height: 56px;
     }
   }
   .hero-arrow-link:hover {
-    background: rgba(88, 102, 255, 0.25);
-    border-color: rgba(111, 125, 255, 0.5);
-    color: #ffffff;
-    transform: translateY(-2px);
-    box-shadow: 0 12px 32px rgba(88, 102, 255, 0.4), 0 0 20px rgba(88, 102, 255, 0.3);
+    background: radial-gradient(circle at 30% 20%, #5a6dff, #252b55);
+    border-color: rgba(141, 153, 255, 0.9);
+    transform: translateY(-2px) scale(1.03);
+    box-shadow: 0 14px 36px rgba(88, 102, 255, 0.7), 0 0 24px rgba(88, 102, 255, 0.6);
   }
   .hero-arrow-link .arrow-icon {
-    width: 20px;
-    height: 20px;
+    width: 22px;
+    height: 22px;
     transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    display: inline-block;
-  }
-  @media (min-width: 768px) {
-    .hero-arrow-link .arrow-icon {
-      width: 24px;
-      height: 24px;
-    }
+    display: block;
   }
   .hero-arrow-link:hover .arrow-icon {
-    transform: translateX(6px);
+    transform: translateX(2px);
   }
   .hero-arrow-link .arrow-icon svg {
     width: 100%;
@@ -3202,11 +3192,12 @@
     Jij krijgt een moderne, snelle website die volledig van jou is <br> zonder abonnement of verborgen kosten.<br><br>
     Laten we zorgen dat jij <span class="firework-tag">knallend 2026</span> ingaat met een website die echt werkt voor jouw bedrijf.  Jij een frisse start, ik een mooi project erbij. <span class="hero-highlight">Perfect toch?</span>
   </p>
-  <a href="/conversie-sheet" class="hero-arrow-link">
-    <span>Bekijk Conversie Sheet</span>
+  <a href="/conversie-sheet" class="hero-arrow-link" aria-label="Bekijk Conversie Sheet">
     <span class="arrow-icon">
       <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="12" cy="12" r="9" fill="rgba(15, 18, 40, 0.9)" stroke="#7c8cff" stroke-width="1.5"/>
+        <path d="M10 8L14 12L10 16" stroke="#aeb7ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M8 12H14" stroke="#aeb7ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
       </svg>
     </span>
   </a>
